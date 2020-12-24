@@ -1,0 +1,7 @@
+blueprint_name="inicio"
+mkdir "$blueprint_name"
+mkdir -p "$blueprint_name/templates/$blueprint_name"
+touch "$blueprint_name/templates/$blueprint_name/inicio.html"
+mkdir "$blueprint_name/static/"
+touch "$blueprint_name/__init__.py"
+touch "$blueprint_name/views.py"
