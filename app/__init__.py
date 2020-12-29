@@ -1,15 +1,15 @@
 from flask import Flask
-from flask_bootstrap import Bootstrap
-from app.inicio import inicio
-from app.logIn import logIn
-from app.db import Usuarios
 from flask_sqlalchemy import SQLAlchemy
-from app.config import Config
+from flask_bootstrap import Bootstrap
+# from inicio import inicio
+from logIn import logIn
+from db import Usuarios
+from config import Config
 
 app = Flask(__name__)
 app.config.from_object(Config)
 
-app.register_blueprint(inicio, url_prefix="/inicio")
+# app.register_blueprint(inicio, url_prefix="/inicio")
 app.register_blueprint(logIn, url_prefix="/")
 
 db_name = 'base.db'
