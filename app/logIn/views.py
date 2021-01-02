@@ -1,7 +1,6 @@
 from flask import (Blueprint, render_template, request, redirect, session, url_for, flash)
 from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import generate_password_hash
-user = {"username": "abc", "password": "xyz"}
+from werkzeug.security import generate_password_hash, check_password_hash
 db = SQLAlchemy()
 logIn = Blueprint(
             'logIn',
@@ -14,18 +13,29 @@ logIn = Blueprint(
 @logIn.route("/login", methods=['POST', 'GET'])
 def inicio_view():
     if(request.method == 'POST'):
-        username = request.form.get('username')
+        email = request.form.get('email')
         password = request.form.get('password')
-        if username == user['username'] and password == user['password']:
-            session['user'] = username
-            return redirect('/dashboard')
-        return "<h1>Wrong username or password</h1>"
+        if not email:
+            error = 'Introduzca el email'
+        elif not password:
+            error = 'Introduzca la contraseña'
+        else:
+            usuario = db.execute(
+                'SELECT * FROM usuarios WHERE email = ?', (email,)
+            ).fetchone()
+            if usuario is None and not check_password_hash(usuario['password'], password):
+                error = 'email o contraseña incorrectos'
+            if error is None:
+                session.clear()
+                session['user_id'] = usuario['id']
+            return redirect(url_for('index'))
+        flash(error)
     return render_template("logIn//logIn.html")
 
 
 @logIn.route('/dashboard')
 def dashboard():
-    if('user' in session and session['user'] == user['username']):
+    if('user' in session and session['user'] == usuario['username']):
         return '<h1>Welcome to the dashboard</h1>'
 
     return '<h1>You are not logged in.</h1>'
