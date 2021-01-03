@@ -5,7 +5,7 @@ db = SQLAlchemy()
 logIn = Blueprint(
             'logIn',
             __name__,
-            template_folder="templates",
+            template_folder="app/templates",
             static_folder='static'
         )
 
@@ -30,7 +30,7 @@ def inicio_view():
                 session['user_id'] = usuario['id']
             return redirect(url_for('index'))
         flash(error)
-    return render_template("logIn//logIn.html")
+    return render_template("logIn.html")
 
 
 @logIn.route('/dashboard')

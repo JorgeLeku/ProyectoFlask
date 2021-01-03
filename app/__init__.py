@@ -18,7 +18,6 @@ db_name = 'base.db'
 db = SQLAlchemy()
 db.init_app(app)
 bootstrap = Bootstrap(app)
-app.TEMPLATE_DIRS = (Config.TEMPLATE_DIRS)
 app.secret_key = (Config.SECRET_KEY)
 
 

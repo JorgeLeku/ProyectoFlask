@@ -1,0 +1,2 @@
+[2021-01-03 10:20:23.542] [sharedprocess] [info] main {"machineId":"473c78c1ec1c333b5aca9f5f0c4cd9d56f4eb4a5bafc40c8c04003ebbde676ce","windowId":2}
+[2021-01-03 10:20:23.597] [sharedprocess] [error] [File Watcher (node.js)] Error: ENOENT: no such file or directory, stat '/home/leku/Downloads/ProyectoFlask/~/.vscode-root/User/snippets'

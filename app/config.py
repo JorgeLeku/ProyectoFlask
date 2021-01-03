@@ -1,6 +1,5 @@
 """Flask config."""
 from os import environ, path
-import os
 from dotenv import load_dotenv
 
 basedir = path.abspath(path.dirname(__file__))
@@ -13,9 +12,6 @@ class Config:
     SECRET_KEY = '6d298e2687b041cf31b02461'
     FLASK_APP = environ.get('FLASK_APP')
     FLASK_ENV = environ.get('FLASK_ENV')
-    TEMPLATE_DIRS = (
-        os.path.join(PROJECT_ROOT, '/app/main/templates/'), 'app/logIn/templates/'
-    )
     SQLALCHEMY_DATABASE_URI = 'postgres://ifqlvinjywonwc:984d006e53da481e436e6d84420c2f107ca1ba94e25046653759fbf0de614d5d@ec2-18-203-62-227.eu-west-1.compute.amazonaws.com:5432/dbreehkc5m52u5'
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False

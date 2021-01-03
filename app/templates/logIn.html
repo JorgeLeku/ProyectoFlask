@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+
+
+{% block title %}<title>Log In</title>{% endblock %}
+{% block login %}
+<div class="bodyLogin">
+    <div class="container loginContainer">
+        <form class="form-signin" method="post">
+            <h2>Iniciar Sesión</h2>
+            <input type="text" class="form-control" name="email" placeholder="Email" required="true" autofocus="" />                        
+            <input type="password" class="form-control" name="contraseña" placeholder="Password" required="true"/>
+            <label class="textoCheckbox"><input type="checkbox" value="Recordarme" id="recordarUsu" name="recordarUsu"> Recordarme</label>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
