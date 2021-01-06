@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+{% block title %}<title>Tienda</title>{% endblock %}
+{% block contenido %}
+<div class="contenedorCards">
+{% for producto in productos %}
+        <div class="card">
+            <h5 name="producto" class="card-title">{{ producto.nombre }}</h5>
+            <p class="card-text">{{producto.categoria}}</p>
+            <p class="card-text">{{producto.cantidad}}</p>
+            <a name="prod"  class="btn btn-primary">COMPRAR</a>
+        </div>
+{% endfor %}
+</div>
+
+{% endblock %}

@@ -99,3 +99,15 @@
         background-color: darkolivegreen;
     }
 }
+.card {
+    display: inline-block;
+    align-items: center;
+    width: 32%;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top: 1%;
+}
+.contenedorCards {
+    display: inline-flex;
+    width: 100%;
+}

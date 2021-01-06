@@ -1,0 +1,65 @@
+{% extends 'main.html' %}
+{% block title %}<title>Usuarios</title>{% endblock %}
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+{% endblock %}
+{% block contenido %}
+    <div class="contenedorDatos">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Email</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Numero</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{usuario.email}}</td>
+                        <td>{{usuario.nombre}}</td>
+                        <td>{{usuario.direccion}}</td>
+                        <td>{{usuario.nombre}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <canvas id="chart" width="400" height="400"></canvas>
+        <script>
+            // bar chart data
+            var barData = {
+                labels : [
+                    {% for item in usuarios.nombre %}
+                        "{{ item }}",
+                    {% endfor %}
+            ],
+                datasets : [{
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                data : [
+                    {% for item in usuarios. %}
+                        "{{ item }}",
+                    {% endfor %}
+                ]}
+            ]
+            }
+            // get bar chart canvas
+            var mychart = document.getElementById("chart").getContext("2d");
+            steps = 10
+            max = {{max}}
+            // draw bar chart
+            new Chart(mychart).Bar(barData, {
+                scaleOverride: true,
+                scaleSteps: steps,
+                scaleStepWidth: Math.ceil(max / steps),
+                scaleStartValue: 0,
+                scaleShowVerticalLines: true,
+                scaleShowGridLines : true,
+                barShowStroke : true,
+                scaleShowLabels: true
+            });
+        </script>
+    </div>
+{% endblock %}

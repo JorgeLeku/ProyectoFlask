@@ -9,9 +9,11 @@
             <h2>Iniciar Sesión</h2>
             <input type="text" class="form-control" name="email" placeholder="Email" required="true" autofocus="" />                        
             <input type="password" class="form-control" name="password" placeholder="Password" required="true"/>
-            <label class="textoCheckbox"><input type="checkbox" value="Recordarme" id="recordarUsu" name="recordarUsu"> Recordarme</label>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-            <label class="textoCheckbox"> <a href="{{ url_for('logIn.register')}}">Registrarse</a></label>
+            <input type="text" class="form-control" name="nombre" placeholder="Nombre" required="true" autofocus="" />
+            <input type="text" class="form-control" name="direccion" placeholder="Direccion" required="true" autofocus="" />
+            <input type="text" class="form-control" name="telefono" placeholder="Telefono" required="true" autofocus="" />
+            <label class="text" href="{{url_for('logIn.log')}}">Tienes cuenta?</label>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Registro</button>
         </form>
     </div>
 </div>

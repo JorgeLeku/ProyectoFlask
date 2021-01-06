@@ -1,4 +1,4 @@
-ALTER TABLE Usuarios ADD
+ALTER TABLE usuarios ADD
   id INTEGER PRIMARY KEY,
  ADD nombre VARCHAR,
  ADD creacion DATE,
@@ -6,7 +6,15 @@ ALTER TABLE Usuarios ADD
  ADD email VARCHAR NOT NULL,
  ADD numero INTEGER
 
-
+CREATE TABLE usuarios (
+  id SERIAL PRIMARY KEY,
+ nombre VARCHAR,
+ creacion DATE,
+ direccion VARCHAR,
+ email VARCHAR NOT NULL,
+ numero INTEGER,
+password VARCHAR
+);
 CREATE TABLE pedidos (
 	id VARCHAR,
 	id_usuario INTEGER,
@@ -16,11 +24,12 @@ CREATE TABLE pedidos (
 );
 
 CREATE TABLE productos (
-id INTEGER PRIMARY KEY,
+id SERIAL PRIMARY KEY,
 nombre VARCHAR,
 categoria VARCHAR,
 precio DECIMAL,
-ubicacion VARCHAR
+ubicacion VARCHAR,
+cantidad INTEGER
 );
 
 CREATE TABLE pedido_productos (

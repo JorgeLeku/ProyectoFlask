@@ -1,6 +1,4 @@
-blueprint_name="main"
+blueprint_name="tienda"
 mkdir "$blueprint_name"
-mkdir -p "$blueprint_name/templates/$blueprint_name"
-touch "$blueprint_name/templates/$blueprint_name/navegacion.html"
 touch "$blueprint_name/__init__.py"
 touch "$blueprint_name/views.py"
