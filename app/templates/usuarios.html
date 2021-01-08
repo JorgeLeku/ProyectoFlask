@@ -2,6 +2,7 @@
 {% block title %}<title>Usuarios</title>{% endblock %}
 {% block scripts %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
 {% endblock %}
 {% block contenido %}
     <div class="contenedorDatos">
@@ -25,40 +26,48 @@
                 {% endfor %}
             </tbody>
         </table>
-        <canvas id="chart" width="400" height="400"></canvas>
+
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-usuCiu-tab" data-toggle="tab" href="#nav-usuCiu" role="tab" aria-controls="nav-usuCiu" aria-selected="true">Usuarios Por Ciudad</a>
+                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-usuCiu" role="tabpanel" aria-labelledby="nav-usuCiu-tab">
+                <canvas id="chartUsuariosCiudad" width="400" height="400"></canvas>
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+        </div>
         <script>
-            // bar chart data
-            var barData = {
-                labels : [
-                    {% for item in usuarios.nombre %}
-                        "{{ item }}",
-                    {% endfor %}
-            ],
-                datasets : [{
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                data : [
-                    {% for item in usuarios. %}
-                        "{{ item }}",
-                    {% endfor %}
-                ]}
-            ]
-            }
-            // get bar chart canvas
-            var mychart = document.getElementById("chart").getContext("2d");
-            steps = 10
-            max = {{max}}
-            // draw bar chart
-            new Chart(mychart).Bar(barData, {
-                scaleOverride: true,
-                scaleSteps: steps,
-                scaleStepWidth: Math.ceil(max / steps),
-                scaleStartValue: 0,
-                scaleShowVerticalLines: true,
-                scaleShowGridLines : true,
-                barShowStroke : true,
-                scaleShowLabels: true
+            var ctx = document.getElementById("chartUsuariosCiudad");
+            var dynamicColors = function() {
+                var r = Math.floor(Math.random() * 255);
+                var g = Math.floor(Math.random() * 255);
+                var b = Math.floor(Math.random() * 255);
+                return "rgb(" + r + "," + g + "," + b + ")";
+            };
+
+            var chartUsuariosCiudad = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [{% for item in cantidades %}
+                        "{{ item[0] }}",
+                    {% endfor %}],
+                    datasets: [{
+                        label: 'Usuarios por Ciudad',
+                        backgroundColor: [
+                            {% for item in cantidades %}
+                                dynamicColors().toString(),
+                            {% endfor %} 
+                        ],
+                        data: [{% for item in cantidades %}
+                            "{{ item[1] }}",
+                        {% endfor %}],
+                    }]
+                }
             });
         </script>
     </div>

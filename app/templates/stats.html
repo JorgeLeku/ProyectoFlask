@@ -1,47 +1,154 @@
 {% extends 'main.html' %}
-{% block title %}Stats{% endblock %}
+{% block title %}<title>Pedidos</title>{% endblock %}
 {% block scripts %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
 {% endblock %}
-{% block contenido %} 
-<canvas id="myChart" width="400" height="400"></canvas>
-<script>
-    // bar chart data
-    var barData = {
-    labels : [
-        {% for categoria in labels %}
-            "{{ categoria }}",
-        {% endfor %}
-    ],
-
-    datasets : [{
-        fillColor: "rgba(151,187,205,0.2)",
-        strokeColor: "rgba(151,187,205,1)",
-        pointColor: "rgba(151,187,205,1)",
-        data : [
-            {% for count in values %}
-                "{{ count }}",
+{% block contenido %}
+<div class="contenedorDatos">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Usuario</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pedido in pedidos %}
+                <tr>
+                    {% for usuario in usuarios %}
+                        {% if usuario.id==pedido.id_usuario %}
+                            <td>{{usuario.nombre}}</td>         
+                        {% endif %}
+                    {% endfor %}
+                    {% for producto in productos %}
+                        {% if producto.id==pedido.id_productos %}
+                            <td>{{producto.nombre}}</td>
+                        {% endif %}
+                    {% endfor %}
+                    <td>{{pedido.estado}}</td>
+                    <td>{{pedido.id}}</td>
+                </tr>
             {% endfor %}
-        ]
-    }]
-    }
-    var mychart = document.getElementById("chart").getContext("2d");
+        </tbody>
+    </table>
 
-    steps = 10
-    max = {{max}}
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-usuCiu-tab" data-toggle="tab" href="#nav-usuCiu" role="tab" aria-controls="nav-usuCiu" aria-selected="true">Estado envios</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Pedidos por usuario</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Pedidos por producto</a>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-usuCiu" role="tabpanel" aria-labelledby="nav-usuCiu-tab">
+            <canvas id="chartEstado" width="400" height="400"></canvas>
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <canvas id="chartPedidosPorUsuario" width="400" height="400"></canvas>
+        </div>
+        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+            <canvas id="chartPedidosPorProducto" width="400" height="400"></canvas>
+        </div>
+    </div>
 
-     // draw bar chart
-    new Chart(mychart).Bar(barData, {
-        scaleOverride: true,
-        scaleSteps: steps,
-        scaleStepWidth: Math.ceil(max / steps),
-        scaleStartValue: 0,
-        scaleShowVerticalLines: true,
-        scaleShowGridLines : true,
-        barShowStroke : true,
-        scaleShowLabels: true
+</div>
+<script>
+    var ctx = document.getElementById("chartEstado");
+    var dynamicColors = function() {
+        var r = Math.floor(Math.random() * 255);
+        var g = Math.floor(Math.random() * 255);
+        var b = Math.floor(Math.random() * 255);
+        return "rgb(" + r + "," + g + "," + b + ")";
+    };
+
+    var chartEstado = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [
+                {% for item in cnt_estado %}
+                    "{{ item[0] }}",
+                {% endfor %}],
+            datasets: [{
+                label: 'Estado de los pedidos',
+                backgroundColor: [
+                    {% for item in cnt_estado %}
+                        dynamicColors().toString(),
+                    {% endfor %} 
+                ],
+                data: [
+                    {% for item in cnt_estado %}
+                        "{{ item[1] }}",
+                    {% endfor %}],
+            }]
         }
-    );
+    });
+</script>
 
-    </script>
+<script>
+    var cta = document.getElementById("chartPedidosPorUsuario");
+    var ctb = document.getElementById("chartPedidosPorProducto");
+    var dynamicColors = function() {
+        var r = Math.floor(Math.random() * 255);
+        var g = Math.floor(Math.random() * 255);
+        var b = Math.floor(Math.random() * 255);
+        return "rgb(" + r + "," + g + "," + b + ")";
+    };
+
+    var chartPedidosPorUsuario = new Chart(cta, {
+        type: 'bar',
+        data: {
+            labels: [
+            {% for item in cnt_usuarios %}
+                {% for x in usuarios %}
+                    {% if item[0]==x.id %}
+                        "{{ x.nombre }}",
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            ],
+            datasets: [{
+                label: 'Pedidos por usuario',
+                backgroundColor: [
+                    {% for item in cnt_usuarios %}
+                        dynamicColors().toString(),
+                    {% endfor %} 
+                ],
+                data: [
+                    {% for item in cnt_usuarios %}
+                        "{{ item[1] }}",
+                    {% endfor %}],
+            }]
+        }
+    });
+
+    var chartPedidosPorProducto = new Chart(ctb, {
+        type: 'bar',
+        data: {
+            labels: [
+            {% for item in cnt_productos %}
+                {% for x in productos %}
+                    {% if item[0]==x.id %}
+                        "{{ x.nombre }}",
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            ],
+            datasets: [{
+                label: 'Pedidos por producto',
+                backgroundColor: [
+                    {% for item in cnt_productos %}
+                        dynamicColors().toString(),
+                    {% endfor %} 
+                ],
+                data: [{% for item in cnt_productos %}
+                    "{{ item[1] }}",
+                {% endfor %}],
+            }]
+        }
+    });
+</script>
+
 {% endblock %}

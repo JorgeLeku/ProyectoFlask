@@ -7,12 +7,12 @@ ALTER TABLE usuarios ADD
  ADD numero INTEGER
 
 CREATE TABLE usuarios (
-  id SERIAL PRIMARY KEY,
- nombre VARCHAR,
- creacion DATE,
- direccion VARCHAR,
- email VARCHAR NOT NULL,
- numero INTEGER,
+	id SERIAL PRIMARY KEY,
+	nombre VARCHAR,
+	creacion DATE,
+	direccion VARCHAR,
+	email VARCHAR NOT NULL,
+	numero INTEGER,
 password VARCHAR
 );
 CREATE TABLE pedidos (
@@ -20,6 +20,9 @@ CREATE TABLE pedidos (
 	id_usuario INTEGER,
 	estado VARCHAR,
 	fechaCreacion DATE,
+	id_productos INTEGER,
+	cantidad INTEGER,
+	FOREIGN KEY (id_productos) REFERENCES productos (id),
 	FOREIGN KEY (id_usuario) REFERENCES usuarios (id)
 );
 
