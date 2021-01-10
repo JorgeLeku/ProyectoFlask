@@ -1,6 +1,6 @@
 from flask import (Blueprint, render_template, request, redirect, session)
 from flask_login import current_user, login_user
-from app.db import Usuarios, db
+from db import Usuarios, db
 
 
 import sys

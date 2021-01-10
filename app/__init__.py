@@ -2,15 +2,15 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 # from inicio import inicio
-from app.logIn import logIn
-from app.db import login
-from app.config import Config
-from app.main import Main
-from app.navegacion import Nav
-from app.tienda import Tienda
+from logIn import logIn
+from db import login
+from config import Config
+from main import Main
+from navegacion import Nav
+from tienda import Tienda
 from flask_flatpages import FlatPages
 from flask_frozen import Freezer
-from app.stats import Stats
+from stats import Stats
 
 app = Flask(__name__)
 app.config.from_object(Config)
