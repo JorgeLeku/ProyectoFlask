@@ -1,1 +1,1 @@
-from stats.views import *
+from app.stats.views import *

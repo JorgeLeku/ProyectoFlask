@@ -1,1 +1,1 @@
-from navegacion.views import *
+from app.navegacion.views import *

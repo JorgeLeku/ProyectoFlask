@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+{% block title %}<title>Añadir producto</title>{% endblock %}
+
+{% block contenido %}
+    <div class="contenedorAnyadir">
+        <form action = "{{ add_prod.path }}" method = "post"></form>
+            <input type="text" class="form-control" name="nombre" placeholder="Nombre" required="true" autofocus="" />
+            <input type="text" class="form-control" name="categoria" placeholder="Categoria" required="true" autofocus="" />
+            <input type="text" class="form-control" name="ubicacion" placeholder="Ubicacion" required="true" autofocus="" />
+            <input type="text" class="form-control" name="cantidad" placeholder="Cantidad" required="true" autofocus="" />
+            <input type="text" class="form-control" name="precio" placeholder="Precio" required="true" autofocus="" />
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Nuevo Producto</button>
+        </form>
+    </div>
+{% endblock %}

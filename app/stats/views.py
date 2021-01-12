@@ -1,7 +1,7 @@
 from flask import (Blueprint, render_template)
-from db import Usuarios, Productos, Pedidos
+from app.db import Usuarios, Productos, Pedidos
 from sqlalchemy import func
-import sys
+from flask_login import login_required, current_user
 Stats = Blueprint(
             'Stats',
             __name__,
@@ -10,19 +10,23 @@ Stats = Blueprint(
 
 
 @Stats.route("/usuarios", methods=["GET"])
+@login_required
 def usuarios():
     usuarios = Usuarios.query.with_entities(Usuarios.email, Usuarios.nombre, Usuarios.direccion, Usuarios.numero).all()
     cantidad = Usuarios.query.with_entities(Usuarios.direccion, func.count(Usuarios.direccion)).group_by(Usuarios.direccion).all()
-    return render_template("usuarios.html",  usuarios=usuarios, cantidades=cantidad)
+    return render_template("usuarios.html",  usuarios=usuarios, cantidades=cantidad, pedidos=pedidos)
 
 
 @Stats.route("/almacenes", methods=["GET"])
-def almacenes(request):
-    productos = Productos.query.with_entities(Productos.almacenes, Productos.nombre, Productos.categoria).all()
-    return render_template("almacenes.html",  productos=productos)
+@login_required
+def almacenes():
+    productos = Productos.query.all()
+    cantidad = Productos.query.with_entities(Productos.ubicacion, func.count(Productos.ubicacion)).group_by(Productos.ubicacion).all()
+    return render_template("almacenes.html",  productos=productos, pedidos=pedidos, cantidades=cantidad)
 
 
 @Stats.route("/pedidos", methods=["GET"])
+@login_required
 def pedidos():
     pedidos = Usuarios.query.all()
     print(pedidos.nombre)
@@ -30,7 +34,11 @@ def pedidos():
 
 
 @Stats.route("/stats")
+@login_required
 def stats():
+    print("bbbbb")
+    print(current_user)
+    print("aaaaa")
     usuarios = Usuarios.query.with_entities(Usuarios.id, Usuarios.nombre, Usuarios.direccion).all()
     pedidos = Pedidos.query.all()
     productos = Productos.query.all()

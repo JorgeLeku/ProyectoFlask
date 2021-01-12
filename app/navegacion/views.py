@@ -7,19 +7,14 @@ Nav = Blueprint(
         )
 
 
-@Nav.route("/barra")
-def main():
-    return render_template("navegacion.html")
-
-
 @Nav.route('/inicio')
-def view_home():
+def preview():
     return render_template("inicio.html", title="Inicio")
 
 
-@Nav.route("/nada")
-def view_first_page():
-    return render_template("inicio.html", title="Stats")
+@Nav.route('/inicio')
+def usuarios():
+    return render_template("inicio.html", title="Inicio")
 
 
 @Nav.route("/login")

@@ -1,5 +1,5 @@
 {% extends 'main.html' %}
-{% block title %}<title>Usuarios</title>{% endblock %}
+{% block title %}<title>Stock</title>{% endblock %}
 {% block scripts %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
@@ -9,19 +9,19 @@
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Email</th>
+                    <th scope="col">Ubicación</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Direccion</th>
-                    <th scope="col">Numero</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Categoria</th>
                 </tr>
             </thead>
             <tbody>
-                {% for usuario in usuarios %}
+                {% for producto in productos %}
                     <tr>
-                        <td>{{usuario.email}}</td>
-                        <td>{{usuario.nombre}}</td>
-                        <td>{{usuario.direccion}}</td>
-                        <td>{{usuario.nombre}}</td>
+                        <td>{{producto.ubicacion}}</td>
+                        <td>{{producto.nombre}}</td>
+                        <td>{{producto.cantidad}}</td>
+                        <td>{{producto.categoria}}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -29,16 +29,16 @@
 
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" id="nav-usuCiu-tab" data-toggle="tab" href="#nav-usuCiu" role="tab" aria-controls="nav-usuCiu" aria-selected="true">Usuarios Por Ciudad</a>
+                <a class="nav-item nav-link active" id="nav-usuCiu-tab" data-toggle="tab" href="#nav-usuCiu" role="tab" aria-controls="nav-usuCiu" aria-selected="true">Productos por almacen</a>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-usuCiu" role="tabpanel" aria-labelledby="nav-usuCiu-tab">
-                <canvas id="chartUsuariosCiudad" width="400" height="400"></canvas>
+                <canvas id="chartProductosAlma" width="400" height="400"></canvas>
             </div>
         </div>
         <script>
-            var ctx = document.getElementById("chartUsuariosCiudad");
+            var ctx = document.getElementById("chartProductosAlma");
             var dynamicColors = function() {
                 var r = Math.floor(Math.random() * 255);
                 var g = Math.floor(Math.random() * 255);
@@ -46,14 +46,14 @@
                 return "rgb(" + r + "," + g + "," + b + ")";
             };
 
-            var chartUsuariosCiudad = new Chart(ctx, {
+            var chartProductosAlma = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: [{% for item in cantidades %}
                         "{{ item[0] }}",
                     {% endfor %}],
                     datasets: [{
-                        label: 'Usuarios por Ciudad',
+                        label: 'Productos por almacen',
                         backgroundColor: [
                             {% for item in cantidades %}
                                 dynamicColors().toString(),

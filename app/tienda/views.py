@@ -1,6 +1,6 @@
-from flask import (Blueprint, render_template, url_for, request)
-from db import Productos
-import sys
+from flask import (Blueprint, render_template, request)
+from app.db import Productos
+from flask_login import current_user
 Tienda = Blueprint(
             'Tienda',
             __name__,
@@ -21,4 +21,4 @@ def index():
         print('aaaaaaaaaaa')
         producto = request.form['producto']
         return render_template('producto.html', producto=producto)
-    return render_template('tienda.html', productos=productos)
+    return render_template('tienda.html', current_user=current_user, productos=productos)

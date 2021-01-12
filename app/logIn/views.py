@@ -1,6 +1,7 @@
 from flask import (Blueprint, render_template, request, redirect, session)
-from flask_login import current_user, login_user
-from db import Usuarios, db
+from flask_login import current_user, login_user, logout_user
+from app.db import Usuarios, db
+from app.tienda import Tienda
 
 
 import sys
@@ -21,7 +22,7 @@ def log():
         user = Usuarios.query.filter_by(email=email).first()
         if user is not None and user.check_password(request.form['password']):
             login_user(user)
-            return redirect('inicio.html')
+            return redirect('/')
     return render_template('logIn.html')
 
 
@@ -53,5 +54,5 @@ def register():
 
 @logIn.route('/logout')
 def logout():
-    session.pop('user')  # session.pop('user') help to remove the session from the browser
-    return redirect('/login')
+    logout_user()  # session.pop('user') help to remove the session from the browser
+    return redirect('/')
