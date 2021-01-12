@@ -33,17 +33,42 @@ class Pedidos(db.Model):
     __tablename__ = 'pedidos'
     id = db.Column(db.Integer, primary_key=True)
     id_usuario = db.Column(db.Integer, ForeignKey('usuarios.id'))
-    id_productos = db.Column(db.Integer, ForeignKey("productos.id"))
-    estado = db.Column(db.String)
+    id_productos = db.Column(db.Integer, ForeignKey('productos.id'))
+    estado = db.Column(db.Integer, ForeignKey('estado.id'))
     fechacreacion = db.Column(db.DateTime)
-    cantidad = db.Column(db.Integer)
 
 
 class Productos(db.Model):
     __tablename__ = 'productos'
     id = db.Column(db.Integer, primary_key=True)
+    id_categoria = db.Column(db.Integer, ForeignKey('categoria.id'))
+    id_ubicacion = db.Column(db.Integer, ForeignKey('ubicacion.id'))
     nombre = db.Column(db.String)
-    categoria = db.Column(db.String)
     precio = db.Column(db.Numeric)
-    ubicacion = db.Column(db.String)
     cantidad = db.Column(db.Integer)
+
+
+class PedidoProductos(db.Model):
+    __tablename__ = 'pedidoProductos'
+    id = db.Column(db.Integer, primary_key=True)
+    id_productos = db.Column(db.Integer, ForeignKey('pedidos.id'))
+    id_pedidos = db.Column(db.Integer, ForeignKey('productos.id'))
+    cantidad = db.Column(db.Integer)
+
+
+class Ubicacion(db.Model):
+    __tablename__ = 'ubicacion'
+    id = db.Column(db.Integer, primary_key=True)
+    ciudad = db.Column(db.String)
+
+
+class Estado(db.Model):
+    __tablename__ = 'estado'
+    id = db.Column(db.Integer, primary_key=True)
+    estado = db.Column(db.String)
+
+
+class Categoria(db.Model):
+    __tablename__ = 'categoria'
+    id = db.Column(db.Integer, primary_key=True)
+    categoria = db.Column(db.String)

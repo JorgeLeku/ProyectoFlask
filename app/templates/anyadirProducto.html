@@ -3,7 +3,7 @@
 
 {% block contenido %}
     <div class="contenedorAnyadir">
-        <form action = "{{ add_prod.path }}" method = "post"></form>
+        <form id="form" method="post">
             <input type="text" class="form-control" name="nombre" placeholder="Nombre" required="true" autofocus="" />
             <input type="text" class="form-control" name="categoria" placeholder="Categoria" required="true" autofocus="" />
             <input type="text" class="form-control" name="ubicacion" placeholder="Ubicacion" required="true" autofocus="" />

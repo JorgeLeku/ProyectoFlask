@@ -1,22 +1,28 @@
 from flask import (Blueprint, render_template, request, flash)
 from app.db import Productos, db
 import sys
+
+
 anyadir = Blueprint(
             'anyadir',
             __name__,
-            template_folder="templates",
+            template_folder="app/templates",
             static_folder='static'
         )
 
 
-@anyadir.route("/anadirProd", methods=['GET', 'POST'])
+@anyadir.route("/anadirProducto", methods=['GET', 'POST'])
 def add_prod():
     if request.method == 'POST':
-        print("aaaaa")
         if not request.form['nombre'] or not request.form['categoria'] or not request.form['ubicacion'] or not request.form['cantidad'] or not request.form['precio']:
             flash('Introduzca todos los datos', 'error')
         else:
-            producto = Productos(request.form['nombre'], request.form['categoria'], request.form['ubicacion'], request.form['cantidad'], request.form['precio'])
+            nombre = request.form['nombre']
+            categoria = request.form['categoria']
+            ubicacion = request.form['ubicacion']
+            cantidad = request.form['cantidad']
+            precio = request.form['precio']
+            producto = Productos(nombre=nombre, categoria=categoria, ubicacion=ubicacion, cantidad=cantidad, precio=precio)
         db.session.add(producto)
         db.session.commit()
         flash('producto correctamente añadido')
