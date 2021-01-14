@@ -2,6 +2,7 @@
 {% block title %}<title>Añadir producto</title>{% endblock %}
 
 {% block contenido %}
+<div class="contenedorDatos">
     <div class="contenedorAnyadir">
         <form id="form" method="post">
             <input type="text" class="form-control" name="nombre" placeholder="Nombre" required="true" autofocus="" />
@@ -12,4 +13,5 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit">Nuevo Producto</button>
         </form>
     </div>
+</div>
 {% endblock %}

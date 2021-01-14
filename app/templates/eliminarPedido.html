@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+{% block title %}<title>Eliminar Pedido</title>{% endblock %}
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+{% endblock %}
+{% block contenido %}
+<div class="contenedorDatos">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th class="columna" scope="col">ID PEDIDO</th>
+                <th class="columna" scope="col">PRODUCTO</th>
+                <th class="columna" scope="col">USUARIO</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pedido in pedidos %}
+                <tr>
+                    <td>{{pedido.id}}</td>
+                    {% for producto in productos %}
+                        {% if producto.id==pedido.id_productos %}
+                            <td>{{producto.nombre}}</td>
+                        {% endif %}
+                    {% endfor %}
+                    {% for usuario in usuarios %}
+                        {% if usuario.id==pedido.id_usuario %}
+                            <td>{{usuario.nombre}}</td>         
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <form id="form" method="post">
+        <input type="text" class="form-control" name="id_pedido" placeholder="Id Pedido" required="true" autofocus="" />
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Eliminar Pedido</button>
+    </form>
+</div>
+{% endblock %}
