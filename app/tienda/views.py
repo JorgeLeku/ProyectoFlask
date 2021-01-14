@@ -1,5 +1,5 @@
 from flask import (Blueprint, render_template, request)
-from app.db import Productos
+from db import Productos
 from flask_login import current_user
 Tienda = Blueprint(
             'Tienda',

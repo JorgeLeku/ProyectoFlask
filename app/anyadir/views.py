@@ -1,5 +1,5 @@
 from flask import (Blueprint, render_template, request, flash)
-from app.db import Productos, db
+from db import Productos, db
 
 
 anyadir = Blueprint(

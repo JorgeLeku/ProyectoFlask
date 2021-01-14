@@ -1,5 +1,5 @@
 from flask import (Blueprint, render_template, request, flash, redirect)
-from app.db import (Productos, Pedidos, Usuarios, db)
+from db import (Productos, Pedidos, Usuarios, db)
 from sqlalchemy.exc import SQLAlchemyError
 
 eliminar = Blueprint(

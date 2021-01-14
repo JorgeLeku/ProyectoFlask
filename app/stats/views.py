@@ -1,5 +1,5 @@
 from flask import (Blueprint, render_template)
-from app.db import Usuarios, Productos, Pedidos
+from db import Usuarios, Productos, Pedidos
 from sqlalchemy import func
 from flask_login import login_required, current_user
 Stats = Blueprint(

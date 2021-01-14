@@ -1,15 +1,15 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
-from app.logIn import logIn
-from app.db import login
-from app.config import Config
-from app.main import Main
-from app.navegacion import Nav
-from app.tienda import Tienda
-from app.stats import Stats
-from app.anyadir import anyadir
-from app.eliminar import eliminar
+from logIn import logIn
+from db import login
+from config import Config
+from main import Main
+from navegacion import Nav
+from tienda import Tienda
+from stats import Stats
+from anyadir import anyadir
+from eliminar import eliminar
 app = Flask(__name__)
 app.config.from_object(Config)
 
