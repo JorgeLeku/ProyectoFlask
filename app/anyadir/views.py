@@ -1,5 +1,6 @@
 from flask import (Blueprint, render_template, request, flash)
-from db import Productos, db
+from app.db import Productos, db
+from flask_login import login_required
 
 
 anyadir = Blueprint(
@@ -11,6 +12,7 @@ anyadir = Blueprint(
 
 
 @anyadir.route("/anadirProducto", methods=['GET', 'POST'])
+@login_required
 def add_prod():
     if request.method == 'POST':
         if not request.form['nombre'] or not request.form['categoria'] or not request.form['ubicacion'] or not request.form['cantidad'] or not request.form['precio']:

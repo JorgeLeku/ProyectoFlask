@@ -4,13 +4,15 @@
 {% block contenido %}
 <div class="contenedorDatos">
     <div class="contenedorAnyadir">
-        <form id="form" method="post">
-            <input type="text" class="form-control" name="nombre" placeholder="Nombre" required="true" autofocus="" />
-            <input type="text" class="form-control" name="categoria" placeholder="Categoria" required="true" autofocus="" />
-            <input type="text" class="form-control" name="ubicacion" placeholder="Ubicacion" required="true" autofocus="" />
-            <input type="text" class="form-control" name="cantidad" placeholder="Cantidad" required="true" autofocus="" />
-            <input type="text" class="form-control" name="precio" placeholder="Precio" required="true" autofocus="" />
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Nuevo Producto</button>
+        <p class="invisible"> . </p>
+        <h2 class="titulo">Añadir Un Nuevo Producto</h2>
+        <form id="formAddProducto" method="post">
+            <input type="text" class="form-control inputAdd" name="nombre" placeholder="Nombre" required="true" autofocus="" />
+            <input type="text" class="form-control inputAdd" name="categoria" placeholder="Categoria" required="true" autofocus="" />
+            <input type="text" class="form-control inputAdd" name="ubicacion" placeholder="Ubicacion" required="true" autofocus="" />
+            <input type="text" class="form-control inputAdd" name="cantidad" placeholder="Cantidad" required="true" autofocus="" />
+            <input type="text" class="form-control inputAdd" name="precio" placeholder="Precio" required="true" autofocus="" />
+            <button class="btn btn-lg btn-primary btn-block botonAdd" type="submit">Nuevo Producto</button>
         </form>
     </div>
 </div>

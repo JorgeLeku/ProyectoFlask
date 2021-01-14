@@ -1,6 +1,7 @@
 from flask import (Blueprint, render_template, request, flash, redirect)
-from db import (Productos, Pedidos, Usuarios, db)
+from app.db import (Productos, Pedidos, Usuarios, db)
 from sqlalchemy.exc import SQLAlchemyError
+from flask_login import login_required
 
 eliminar = Blueprint(
             'eliminar',
@@ -12,6 +13,7 @@ prodEliminado = ''
 
 
 @eliminar.route("/eliminarPedido", methods=['GET', 'POST'])
+@login_required
 def rm_ped():
     if request.method == 'POST':
         if not request.form['id_pedido']:
@@ -35,6 +37,7 @@ def rm_ped():
 
 
 @eliminar.route("/eliminarProducto", methods=['GET', 'POST'])
+@login_required
 def rm_prod():
     if request.method == 'POST':
         if not request.form['id_producto']:

@@ -6,6 +6,8 @@
 {% endblock %}
 {% block contenido %}
 <div class="contenedorDatos">
+    <p class="invisible"> . </p>
+    <h2 class="tituloElim">Eliminar Pedido</h2>
     <table class="table">
         <thead class="thead-dark">
             <tr>
@@ -32,9 +34,11 @@
             {% endfor %}
         </tbody>
     </table>
-    <form id="form" method="post">
-        <input type="text" class="form-control" name="id_pedido" placeholder="Id Pedido" required="true" autofocus="" />
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Eliminar Pedido</button>
-    </form>
+    <div class="contenedorEliminar">
+        <form id="formPedido" method="post">
+            <input type="text" class="form-control inputAdd" name="id_pedido" placeholder="Id Pedido" required="true" autofocus="" />
+            <button class="btn btn-lg btn-primary btn-block botonAdd" type="submit">Eliminar Pedido</button>
+        </form>
+    </div>
 </div>
 {% endblock %}

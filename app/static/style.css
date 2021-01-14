@@ -68,6 +68,9 @@
     margin: 0 auto;
     padding: 3%;
 }
+.titulo {
+    margin-top: 2%;
+}
 .form-signin {
     background-color: gray;
     box-sizing: border-box;
@@ -98,6 +101,7 @@
     width: 90%;
     margin-left: 5%;
     background-color: white; 
+    margin-top: 0%;
 }
 .contenido {
     height: 100%;
@@ -107,7 +111,41 @@
     background-size: cover;
     width: 100%;
     position: fixed;
+}
 
+.formAddProducto {
+    width: 60%;
+    margin-top: 0%;
+}
+.inputAdd {
+    margin-top: 2%;
+}
+.contenedorAnyadir {
+    font-family: helvetica, arial, sans-serif;
+    height:100%;
+    width: 70%;
+    margin-left: 15%;
+    background-color: white; 
+}
+.invisible {
+    color: white;
+}
+
+.botonAdd {
+    margin-top: 2%;
+}
+.tituloElim {
+    margin-top: 2%;
+}
+.formPedido { 
+    width: 70%
+}
+.contenedorEliminar {
+    font-family: helvetica, arial, sans-serif;
+    height:100%;
+    width: 20%;
+    margin-left: 2%;
+    background-color: white; 
 }
 @media only screen and (max-width: 768px)  {
     .form-signin {
@@ -148,5 +186,21 @@
     .contenedorCards {
         display: inline-flex;
         width: 100%;
+    }
+    .formPedido { 
+        width: 100%
+    }
+    .contenedorEliminar {
+        width: 100%;
+        margin-left: 0%;
+    }
+    .formAddProducto {
+        width: 100%;
+        margin-top: 0%;
+    }
+    .contenedorDatos {
+        width: 100%;
+        margin-left: 0%;
+        margin-top: 0%;
     }
 }

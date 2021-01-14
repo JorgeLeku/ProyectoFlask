@@ -1,7 +1,6 @@
-from flask import (Blueprint, render_template, request, redirect, session)
+from flask import (Blueprint, render_template, request, redirect)
 from flask_login import current_user, login_user, logout_user
-from db import Usuarios, db
-from tienda import Tienda
+from app.db import Usuarios, db
 
 
 import sys
@@ -14,7 +13,7 @@ logIn = Blueprint(
 
 
 @logIn.route('/login', methods=['POST', 'GET'])
-def log():
+def login():
     if current_user.is_authenticated:
         return redirect('/inicio.html')
     if request.method == 'POST':
@@ -23,6 +22,8 @@ def log():
         if user is not None and user.check_password(request.form['password']):
             login_user(user)
             return redirect('/')
+    else:
+        return render_template('logIn.html')
     return render_template('logIn.html')
 
 

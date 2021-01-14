@@ -1,1 +1,1 @@
-from anyadir.views import *
+from app.anyadir.views import *

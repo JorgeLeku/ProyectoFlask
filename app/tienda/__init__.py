@@ -1,1 +1,1 @@
-from tienda.views import *
+from app.tienda.views import *

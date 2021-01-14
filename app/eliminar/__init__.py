@@ -1,1 +1,1 @@
-from eliminar.views import *
+from app.eliminar.views import *

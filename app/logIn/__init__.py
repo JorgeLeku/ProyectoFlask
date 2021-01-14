@@ -1,1 +1,1 @@
-from logIn.views import *
+from app.logIn.views import *

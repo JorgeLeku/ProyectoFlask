@@ -1,15 +1,15 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
-from logIn import logIn
-from db import login
-from config import Config
-from main import Main
-from navegacion import Nav
-from tienda import Tienda
-from stats import Stats
-from anyadir import anyadir
-from eliminar import eliminar
+from app.logIn import logIn
+from app.db import login
+from app.config import Config
+from app.main import Main
+from app.navegacion import Nav
+from app.tienda import Tienda
+from app.stats import Stats
+from app.anyadir import anyadir
+from app.eliminar import eliminar
 app = Flask(__name__)
 app.config.from_object(Config)
 
@@ -30,20 +30,3 @@ db.init_app(app)
 
 bootstrap = Bootstrap(app)
 app.secret_key = (Config.SECRET_KEY)
-
-"""
-@app.route('/')
-def index():
-    try:
-        usuarios = Usuarios.query.order_by(Usuarios.nombre).all()
-        usuarios_name = '<ul>'
-        for usuario in usuarios:
-            usuarios_name += '<li>' + usuario.nombre + ', ' + usuario.direccion + '</li>'
-        usuarios_name += '</ul>'
-        return usuarios_name
-    except Exception as e:
-        # e holds description of the error
-        error_text = "<p>The error:<br>" + str(e) + "</p>"
-        hed = '<h1>Something is broken.</h1>'
-        return hed + error_text
-"""
